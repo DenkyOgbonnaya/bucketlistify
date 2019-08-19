@@ -6,6 +6,10 @@ const buckeSchema = new Schema({
         type: String,
         required: true
     },
+    items: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Item'
+    }],
     created_by: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
