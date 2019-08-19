@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const connectDb = require('./server/models/database');
 
 const app = express();
 
@@ -21,7 +22,7 @@ if(process.env.NODE_ENV == 'production'){
     })
 }
 
-
+connectDb()
 //listening port
 app.listen(port, (err) =>{
     if(err) throw err ;
