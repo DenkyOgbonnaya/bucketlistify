@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const connectDb = require('./server/models/database');
+const bucketRouter = require('./server/routes/bucketRoutes');
 
 const app = express();
 
@@ -9,9 +10,10 @@ const port = process.env.PORT || 8080;
 app.use(express.json());
 app.options('*', cors());
 app.use(cors({credentials:true, origin: 'http://localhost:3000'}));
+app.use('/api', bucketRouter)
 
 app.use( (err, req, res, next) => {
-    return res.status(400).send({status: 'error', message: err.message})
+    return res.status(500).send(err);
 })
 app.get('/', (req, res) => {
     res.send('plan before you kkkllld');
