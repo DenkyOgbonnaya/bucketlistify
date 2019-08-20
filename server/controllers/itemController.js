@@ -20,13 +20,26 @@ const itemCtrl = {
     },
     async getItems(req, res){
         const{id} = req.params;
+        const page = Number(req.query.page) || 1;
+        let limit = Number(req.query.limit) || 20;
+
+        if(limit > 100){
+            limit = 100;
+        }
+
+        
        try{
-           const items = await itemService.items(id);
+           const items = await itemService.items(id, {page, limit});
+           const count = await itemService.itemstCount();
+
            if(items.length === 0 )
                 return res.status(204).send({message: 'No items in this bucket'});
             return res.status(200).send({
                 status: 'success',
                 items,
+                page,
+                pages: Math.ceil(count/limit),
+                total: count
             })
         }catch(err){
             res.status(500).send(err.message);

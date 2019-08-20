@@ -8,10 +8,24 @@ const bucketService = {
             throw err;
         }
     },
-    async list(){
+    async list(paginatioOptions){
+        const{page, limit} = paginatioOptions;
+        const offset = (page*limit)-limit;
+
         try{
-            return bucketList = await  Bucket.find().populate('items', ' -__v');
+            return bucketList = await  Bucket.find()
+            .skip(offset)
+            .limit(limit)
+            .sort({createdAt: -1})
+            .populate('items', ' -__v');
           }catch(err){
+            throw err;
+        }
+    },
+    async bucketListCount(){
+        try{
+            return count = Bucket.countDocuments();
+        }catch(err){
             throw err;
         }
     },

@@ -14,14 +14,26 @@ const bucketCtrl = {
         }
     },
     async getBucketList(req, res){
+        const page = Number(req.query.page) || 1;
+        let limit = Number(req.query.limit) || 20;
+
+        if(limit > 100){
+            limit = 100;
+        }
+
        try{
-           const bucketList = await bucketService.list();
+           const bucketList = await bucketService.list({page, limit});
+           const bucketListCount = await bucketService.bucketListCount();
+
            if(bucketList.length === 0 )
-                return res.status(404).send({message: 'Empty bucketlist'});
+                return res.status(204).send({message: 'Empty bucketlist'});
             return res.status(200).send({
                 status: 'success',
                 bucketList,
-            })
+                page,
+                pages: Math.ceil(bucketListCount/limit),
+                total: bucketListCount
+                })
         }catch(err){
             res.status(500).send(err.message);
 

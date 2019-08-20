@@ -8,10 +8,23 @@ const ItemService = {
             throw err;
         }
     },
-    async items(bucket_id){
+    async items(bucket_id, paginatioOptions){
+        const{page, limit} = paginatioOptions;
+        const offset = (page*limit)-limit;
+
         try{
-            return ItemList = await  Item.find({bucket: bucket_id}, '-__v');
+            return ItemList = await  Item.find({bucket: bucket_id}, '-__v')
+            .skip(offset)
+            .limit(limit)
+            .sort({createdAt: -1})
           }catch(err){
+            throw err;
+        }
+    },
+    async itemstCount(){
+        try{
+            return count = Item.countDocuments();
+        }catch(err){
             throw err;
         }
     },
