@@ -27,3 +27,18 @@ module.exports.emailExist = async (req, res, next) => {
         throw err
     }
 }
+module.exports.hasAccess = (req, res, next) => {
+    let token = req.headers['authorization'] || req.headers['x-access-token']
+    
+    if(token && token.startsWith('Bearer'))
+        token = token.slice(7);
+    if(!token) return res.status(401 ).send({message: 'Access denied! unauthorized user'})
+    
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded)=>{
+        if(err) {
+            return res.status(401).send({message: err.message})
+        }
+    
+        next();
+    });
+}
