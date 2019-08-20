@@ -9,12 +9,12 @@ module.exports.validateBucketitem = [
 ]
 module.exports.validateUserDetails= validateUserData = [
     check('username', 'username is required').isLength({min: 2}),
-    check('email', 'valid email  is required').isEmail(),
+    check('email', 'valid email  is required').optional().isEmail(),
     check('password', 'password is required or too short').isLength({min: 3})
 ]
 //validate login data
 module.exports.validateLoginDetails = [
-    check('username', 'username is required').isLength({min: 3}),
+    check('username', 'username is required').isLength({min: 2}),
     check('password', 'password is required').isLength({min: 3})
 ]
 module.exports.checkValidationResult = (req, res, next) => {
