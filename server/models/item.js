@@ -12,7 +12,8 @@ const itemSchema = new Schema({
     },
     bucket: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Bucket'
+        ref: 'Bucket',
+        select: false
     }
 },
     {timestamps: true}
