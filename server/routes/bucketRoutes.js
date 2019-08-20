@@ -1,5 +1,6 @@
 const BucketRouter = require('express').Router();
-const bucketCtrl = require('../controllers/bucketController');
+const bucketController = require('../controllers/bucketController');
+const itemController = require('../controllers/itemController');
 
 const{
     createBucket, 
@@ -7,7 +8,14 @@ const{
     getSingleBucket, 
     updateBucket, 
     deleteBucket
-} = bucketCtrl;
+} = bucketController;
+const{
+    createItem, 
+    getItems, 
+    getSingleItem, 
+    updateItem, 
+    deleteItem
+} = itemController;
 
 BucketRouter.route('/bucketlists')
 .post(createBucket)
@@ -17,5 +25,14 @@ BucketRouter.route('/bucketlists/:id')
 .get(getSingleBucket)
 .put(updateBucket)
 .delete(deleteBucket)
+
+BucketRouter.route('/bucketlists/:id/items')
+.post(createItem)
+.get(getItems)
+
+BucketRouter.route('/bucketlists/:id/items/:item_id')
+.get(getSingleItem)
+.put(updateItem)
+.delete(deleteItem)
 
 module.exports = BucketRouter
