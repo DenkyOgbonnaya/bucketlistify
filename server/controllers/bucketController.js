@@ -16,18 +16,20 @@ const bucketCtrl = {
     async getBucketList(req, res){
         const page = Number(req.query.page) || 1;
         let limit = Number(req.query.limit) || 20;
-        const search = req.query.q || '';
-        const query = {};
+        const search = req.query.q;
+        const created_by = req.query.created_by;
+        let query = {};
 
-        if(limit > 100){
+        if(limit > 100)
             limit = 100;
-        }
-        if(search){
+        if(search)
             query.name = {$regex: search, $options: 'i'}
-        }
+        if(created_by)
+            query.created_by = created_by;
+
        try{
            const bucketList = await bucketService.list(query, {page, limit});
-           const bucketListCount = await bucketService.bucketListCount();
+           const bucketListCount = await bucketService.bucketListCount(created_by);
 
            if(bucketList.length === 0 )
                 return res.status(204).send({message: 'Empty bucketlist'});

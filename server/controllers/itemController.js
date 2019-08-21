@@ -1,4 +1,5 @@
 const itemService = require('../services/itemService');
+const bucketlistEvent = require('../utills/bucketlistEvents');
 
 const itemCtrl = {
     async createItem(req, res){
@@ -8,6 +9,7 @@ const itemCtrl = {
             let item = await itemService.create({name, bucket: id});
             let itemObj = item.toObject();
             delete itemObj.bucket;
+            bucketlistEvent.emit('newItem', id, itemObj);
 
             return res.status(201).send({
                 status: 'success',
@@ -22,7 +24,7 @@ const itemCtrl = {
         const{id} = req.params;
         const page = Number(req.query.page) || 1;
         let limit = Number(req.query.limit) || 20;
-        const search = req.query.q || '';
+        const search = req.query.q;
         const query = {};
 
         if(limit > 100){

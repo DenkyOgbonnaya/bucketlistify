@@ -17,14 +17,15 @@ const bucketService = {
             .skip(offset)
             .limit(limit)
             .sort({createdAt: -1})
+            .populate('created_by', '-password -__v')
             .populate('items', ' -__v');
           }catch(err){
             throw err;
         }
     },
-    async bucketListCount(){
+    async bucketListCount(created_by){
         try{
-            return count = Bucket.countDocuments();
+            return count = Bucket.countDocuments({created_by});
         }catch(err){
             throw err;
         }
