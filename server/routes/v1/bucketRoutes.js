@@ -1,8 +1,8 @@
 const BucketRouter = require('express').Router();
-const bucketController = require('../controllers/bucketController');
-const itemController = require('../controllers/itemController');
-const{validateBucketitem, validateBucketlist, checkValidationResult} = require('../middlewares/validations');
-const {hasAccess} = require('../middlewares/auth');
+const bucketController = require('../../controllers/bucketController');
+const itemController = require('../../controllers/itemController');
+const{validateBucketitem, validateBucketlist, checkValidationResult} = require('../../middlewares/validations');
+const {hasAccess} = require('../../middlewares/auth');
 
 const{
     createBucket, 
