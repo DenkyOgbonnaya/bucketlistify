@@ -8,12 +8,13 @@ const ItemService = {
             throw err;
         }
     },
-    async items(bucket_id, paginatioOptions){
+    async items(bucket_id, query, paginatioOptions){
         const{page, limit} = paginatioOptions;
         const offset = (page*limit)-limit;
+        query.bucket = bucket_id;
 
         try{
-            return ItemList = await  Item.find({bucket: bucket_id}, '-__v')
+            return ItemList = await  Item.find(query, '-__v')
             .skip(offset)
             .limit(limit)
             .sort({createdAt: -1})

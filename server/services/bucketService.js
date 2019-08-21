@@ -8,12 +8,12 @@ const bucketService = {
             throw err;
         }
     },
-    async list(paginatioOptions){
+    async list(query, paginatioOptions){
         const{page, limit} = paginatioOptions;
         const offset = (page*limit)-limit;
 
         try{
-            return bucketList = await  Bucket.find()
+            return bucketList = await  Bucket.find(query)
             .skip(offset)
             .limit(limit)
             .sort({createdAt: -1})

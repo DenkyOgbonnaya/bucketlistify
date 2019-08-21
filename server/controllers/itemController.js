@@ -22,14 +22,18 @@ const itemCtrl = {
         const{id} = req.params;
         const page = Number(req.query.page) || 1;
         let limit = Number(req.query.limit) || 20;
+        const search = req.query.q || '';
+        const query = {};
 
         if(limit > 100){
             limit = 100;
         }
-
+        if(search){
+            query.name = {$regex: search, $options: 'i'}
+        }
         
        try{
-           const items = await itemService.items(id, {page, limit});
+           const items = await itemService.items(id, query, {page, limit});
            const count = await itemService.itemstCount();
 
            if(items.length === 0 )

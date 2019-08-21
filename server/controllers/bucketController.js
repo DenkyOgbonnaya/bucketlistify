@@ -16,13 +16,17 @@ const bucketCtrl = {
     async getBucketList(req, res){
         const page = Number(req.query.page) || 1;
         let limit = Number(req.query.limit) || 20;
+        const search = req.query.q || '';
+        const query = {};
 
         if(limit > 100){
             limit = 100;
         }
-
+        if(search){
+            query.name = {$regex: search, $options: 'i'}
+        }
        try{
-           const bucketList = await bucketService.list({page, limit});
+           const bucketList = await bucketService.list(query, {page, limit});
            const bucketListCount = await bucketService.bucketListCount();
 
            if(bucketList.length === 0 )
