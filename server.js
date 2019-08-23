@@ -3,6 +3,8 @@ const cors = require('cors');
 const path = require('path');
 const connectDb = require('./server/models/database');
 const router = require('./server/routes');
+const swaggerUi = require('swagger-ui-express');
+const openApiDocs = require('./server/openapi');
 
 const app = express();
 
@@ -10,6 +12,7 @@ const port = process.env.PORT || 8080;
 app.use(express.json());
 app.options('*', cors());
 app.use(cors({credentials:true, origin: 'http://localhost:3000'}));
+app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(openApiDocs));
 app.use('/api', router);
 
 app.use( (err, req, res, next) => {
