@@ -1,0 +1,9 @@
+.delete-bucketlist {
+    padding: 5px;
+    font-weight: 50px;
+    cursor: pointer;
+    width: 10px;
+}
+.delete-bucketlist:hover {
+    color: red;
+}

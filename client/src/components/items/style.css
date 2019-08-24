@@ -1,0 +1,13 @@
+.bucket-details {
+    padding: 10px;
+    text-align: center;
+}
+.delete-item {
+    padding: 5px;
+    font-weight: 50px;
+    cursor: pointer;
+    width: 10px;
+}
+.delete-item:hover {
+    color: red;
+}
