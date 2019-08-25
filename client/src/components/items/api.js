@@ -1,21 +1,28 @@
 import axios from 'axios';
 
-const api = () => {
     const bearerToken = localStorage.getItem('bearerToken');
     axios.defaults.headers.common = {'Authorization': `Bearer ${bearerToken}`}
     axios.defaults.validateStatus = status => status < 500;
 
     export const createItem = async (id, data) => {
         try{
-            return response = await axios.post(`/api/v1//bucketlists/${id}/items`, data)
+            return await axios.post(`/api/v1//bucketlists/${id}/items`, data)
         }catch(err){
             console.log(err);
             
         }
     }
-    export const getItems = async (id) => {
+    export const getItems = async (id, page, limit) => {
         try{
-            return response = await axios.get(`/api/v1//bucketlists/${id}/items`)
+            return await axios.get(`/api/v1//bucketlists/${id}/items?page=${page}&limit=${limit}`)
+        }catch(err){
+            console.log(err);
+            
+        }
+    }
+    export const searchItems = async (id, search) => {
+        try{
+            return await axios.get(`/api/v1//bucketlists/${id}/items?q=${search}`)
         }catch(err){
             console.log(err);
             
@@ -23,7 +30,7 @@ const api = () => {
     }
     export const getSingleItem = async (bucketlistsId, itemId) => {
         try{
-            return response = await axios.get(`/api/v1//bucketlists/${bucketlistsId}/items/${itemId}`)
+            return await axios.get(`/api/v1//bucketlists/${bucketlistsId}/items/${itemId}`)
         }catch(err){
             console.log(err);
             
@@ -31,7 +38,7 @@ const api = () => {
     }
     export const updateItem = async (bucketlistsId, itemId, data) => {
         try{
-            return response = await axios.put(`/api/v1//bucketlists/${bucketlistsId}/items/${itemId}`, data)
+            return await axios.put(`/api/v1//bucketlists/${bucketlistsId}/items/${itemId}`, data)
         }catch(err){
             console.log(err);
             
@@ -39,10 +46,9 @@ const api = () => {
     }
     export const deleteItem = async (bucketlistsId, itemId) => {
         try{
-            return response = await axios.delet(`/api/v1//bucketlists/${bucketlistsId}/items/${itemId}`)
+            return await axios.delete(`/api/v1//bucketlists/${bucketlistsId}/items/${itemId}`)
         }catch(err){
             console.log(err);
             
         }
     }
-}

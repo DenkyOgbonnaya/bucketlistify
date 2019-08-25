@@ -1,4 +1,4 @@
-.bucket-details {
+.bucketlist-details {
     padding: 10px;
     text-align: center;
 }
@@ -11,3 +11,18 @@
 .delete-item:hover {
     color: red;
 }
+.bucketlist {
+    margin-top: 5px;
+    margin-bottom: 5px
+  }
+  
+  .cardlink {
+    color: grey;
+    text-align: center
+  }
+  .cardtitle, .cardfooter {
+    text-align: center
+  }
+  .cardtext >* {
+      margin-right: 10px
+  }

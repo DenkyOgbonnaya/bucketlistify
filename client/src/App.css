@@ -1,11 +1,3 @@
-.bucketlist {
-  margin-top: 5px;
-  margin-bottom: 5px
-}
-.cardtitle, .cardfooter {
-  text-align: center
-}
-.cardlink, .checkbox {
-  color: gray;
+.spinner  {
   text-align: center
 }

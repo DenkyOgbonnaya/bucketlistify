@@ -4,30 +4,37 @@ import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
 import {Alert} from 'reactstrap';
 import Spinner from '../includes/spinner';
-
 import './style.css';
+import { login } from './api';
+import {useGlobal} from 'reactn';
 
 const LoginForm = props => {
     const[username, setUsername] = useState('');
     const[password, setPassword] = useState('');
     const[isError, setIsError] = useState(false);
+    const[error, setError] = useState('');
     const[loggingIn, setLogingIn] = useState(false);
+    const[isAuthenticated, setIsAuthenticated] = useGlobal('isAuthenticated');
 
     const handleSubmit = e => {
         e.preventDefault();
 
         const {from} = props.location.state || {from : {pathName: '/' }};
+        setLogingIn(true);
 
-        /*login({username, password}, dispatchAuth)
-        .then(data => {
-            if(data && data.status === 'success'){
+        login({username, password})
+        .then(res => {
+            if(res.status === 200){
+                localStorage.bearerToken = res.data.token;
+                setIsAuthenticated(true)
                 
                 props.history.push(from.pathname || from.pathName);
             }else {
                 setIsError(true);
+                setError(res.data.message)
             }
             setLogingIn(false);
-        })*/
+        })
     }
     return(
         <div className='auth'>
@@ -36,7 +43,7 @@ const LoginForm = props => {
             
             
         <div className = 'form'>
-            <Alert color='danger' isOpen={isError} > erroe </Alert>
+            <Alert color='danger' isOpen={isError} > {error} </Alert>
                 <h5>Login  </h5> <br />
             {loggingIn && <Spinner color='success' />}
 

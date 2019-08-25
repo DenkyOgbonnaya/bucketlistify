@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
+import {useGlobal} from 'reactn';
 import {Button, NavItem, Nav, Navbar, NavLink, NavbarBrand, NavbarToggler} from 'reactstrap';
 import {withRouter, NavLink as RRNavlink} from 'react-router-dom';
 const NavBar = props => {
-  const[isAuthenticated] = useState(false);
+  const[isAuthenticated, setIsAuthenticated] = useGlobal('isAuthenticated');
 
-  const handleLogout = () => {
-  }
   const gotoHome = e => {
     e.preventDefault();
     props.history.push('/');
+  }
+  const handleLogout = () => {
+    localStorage.removeItem('bearerToken');
+    setIsAuthenticated(false);
   }
 
   return (
@@ -19,7 +22,7 @@ const NavBar = props => {
               <NavItem>
               {isAuthenticated ?
               <NavItem>
-              <NavLink to='/signup' tag={RRNavlink} > Logout </NavLink>
+              <NavLink to='/login' tag={RRNavlink} onClick={ handleLogout} > Logout </NavLink>
             </NavItem>
              :
              <Nav className="ml-auto" navbar>

@@ -5,34 +5,38 @@ import {withRouter} from 'react-router-dom';
 import {Alert} from 'reactstrap';
 import Spinner from '../includes/spinner';
 import './style.css';
+import { signup } from './api';
 
 const SignupForm = props => {
     const[username, setUserName] = useState('');
     const[email, setEmail] = useState('');
     const[password, setPassword] = useState('');
     const[isError, setIsError] = useState(false);
+    const[error, setError] =  useState('');
     const[signingUp, setSigningUp] = useState(false);
 
     const handleSubmit = e => {
         e.preventDefault();
 
         setSigningUp(true);
-        /*signup({username, email, password}, dispatchAuth)
-        .then(data => {
-            if(data && data.status === 'success'){
+        signup({username, email, password})
+        .then(res => {
+            if(res.status === 201){
+                localStorage.bearerToken = res.data.token;
                 props.history.push('/');
             }else {
                 setIsError(true);
+                setError(res.data.message)
             }
             setSigningUp(false);
-        })*/
+        })
     }
     return (
         <div className='auth' >
             <img src='/favicon.ico' alt='logo' />
         <div className = 'authForm'>
             <div className = 'form'>
-            <Alert color='danger' isOpen={isError} > erm </Alert>
+            <Alert color='danger' isOpen={isError} > {error.message}  </Alert>
             <h5> Create an account </h5>
             {signingUp && <Spinner />}
                 <Form onSubmit = {handleSubmit} >

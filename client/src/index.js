@@ -5,6 +5,12 @@ import './index.css';
 import App from './App';
 import {BrowserRouter as Router} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+import {setGlobal} from 'reactn';
+
+setGlobal({
+    isAuthenticated: false,
+    currentUser: {},
+})
 
 ReactDOM.render(
     <Router>
