@@ -7,10 +7,10 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8080/api/v1"
+      "url": "https://bucketlistify.herokuapp.com/api/v1"
     },
     {
-      "url": "http://localhost:8080"
+      "url": "https://bucketlistify.herokuapp.com"
     }
   ],
   "paths": {
@@ -275,7 +275,7 @@
         }
       }
     },
-    "/bucketlist/{id}": {
+    "/bucketlists/{id}": {
       "parameters": [
         {
           "name": "id",
@@ -391,7 +391,7 @@
         }
       }
     },
-    "/bucketlist/{id}/items": {
+    "/bucketlists/{id}/items": {
       "post": {
         "summary": "Creates a new item in bucket list",
         "parameters": [
@@ -482,7 +482,7 @@
         }
       }
     },
-    "/bucketlist/{id}/items/{item_id}": {
+    "/bucketlists/{id}/items/{item_id}": {
       "parameters": [
         {
           "name": "id",
