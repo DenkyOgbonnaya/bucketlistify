@@ -42,7 +42,7 @@
         },
         "responses": {
           "200": {
-            "description": "A JSON object with jwt",
+            "description": "A JSON object with jwt currentUser payload",
             "content": {
               "application/json": {
                 "schema": {
@@ -173,11 +173,11 @@
                     },
                     "createdAt": {
                       "type": "string",
-                      "example": "iso5366"
+                      "example": "08-23-2019"
                     },
                     "updatedAt": {
                       "type": "string",
-                      "example": "iso5366"
+                      "example": "08-23-2019"
                     }
                   }
                 }
@@ -185,10 +185,10 @@
             }
           },
           "400": {
-            "description": "Invalid inputs details"
+            "description": "{message: Invalid inputs details}"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "{message: Unauthorized}"
           },
           "default": {
             "description": "Unexpected error"
@@ -264,10 +264,10 @@
             }
           },
           "204": {
-            "description": "No content"
+            "description": "{message: No content}"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "{message: Unauthorized}"
           },
           "default": {
             "description": "Unexpected error"
@@ -301,10 +301,10 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "{message: Unauthorized}"
           },
           "404": {
-            "description": "not found"
+            "description": "{message: not found}"
           },
           "default": {
             "description": "Unexpected error"
