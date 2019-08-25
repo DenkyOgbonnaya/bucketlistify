@@ -18,7 +18,7 @@ const ItemView = (props) => {
                 setIsLoading(false);
             }
         })
-    }, []);
+    }, [bucketlistId, itemId]);
 
     if(isLoding)
         return <Spinnar />

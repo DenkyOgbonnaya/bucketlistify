@@ -10,19 +10,21 @@ const App = () => {
   const[isAuthenticated, setIsAuthenticated] = useGlobal('isAuthenticated');
 
   useEffect( () => {
-    const bearerToken = localStorage.bearerToken;
-    if(bearerToken){
-      const{currentUser} = jwt.decode(bearerToken);
-      
-      if(currentUser){
-        setIsAuthenticated(true);
-        setCurrentUser(currentUser);
+    const setUser = () => {
+      const bearerToken = localStorage.bearerToken;
+      if(bearerToken){
+        const{currentUser} = jwt.decode(bearerToken);
+        
+        if(currentUser){
+          setIsAuthenticated(true);
+          setCurrentUser(currentUser);
+        }
       }
-    }else{
-      setIsAuthenticated(false);
-      setCurrentUser({});
     }
+    setUser();
   }, [])
+
+  
   return (
     <div className="App">
       <NavBar />

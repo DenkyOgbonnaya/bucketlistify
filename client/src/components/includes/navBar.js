@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useGlobal} from 'reactn';
-import {Button, NavItem, Nav, Navbar, NavLink, NavbarBrand, NavbarToggler} from 'reactstrap';
-import {withRouter, NavLink as RRNavlink} from 'react-router-dom';
+import {NavItem, Nav, Navbar, NavLink, NavbarBrand} from 'reactstrap';
+import {NavLink as RRNavlink, withRouter} from 'react-router-dom';
 const NavBar = props => {
   const[isAuthenticated, setIsAuthenticated] = useGlobal('isAuthenticated');
 
@@ -43,4 +43,4 @@ const NavBar = props => {
   );
 }
 
-export default withRouter(NavBar);
+export default withRouter(NavBar)

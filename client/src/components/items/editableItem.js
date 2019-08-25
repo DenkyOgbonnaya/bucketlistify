@@ -1,7 +1,7 @@
-import React, {useState, Fragment} from 'react';
+import React, {useState} from 'react';
 import Form from '../bucketlist/form';
 import {withRouter} from 'react-router-dom';
-import {Card, CardBody, CardTitle, CardText, CardLink, CardFooter, Input, Label} from 'reactstrap';
+import {Card, CardBody, CardTitle, CardText, CardLink, CardFooter} from 'reactstrap';
 import './style.css';
 import moment from 'moment';
 import RadioBtn from '../includes/radioBtns';
@@ -33,7 +33,7 @@ const EditableItem = (props) => {
                 <span className='delete-item' onClick={ () => props.delet(item._id)} > X </span>
                 <CardBody> 
                     <CardTitle size='md' className='cardtitle'> <h4> {item.name} </h4> </CardTitle>
-                    <CardText clssName='cardtext'> 
+                    <CardText className='cardtext'> 
                         <small className='text-muted'> Created: {moment(item.createdAt).fromNow(true)} </small>
                         <small className='text-muted'> Last updated: {moment(item.updatedAt).fromNow(true)} </small>
                     </CardText>

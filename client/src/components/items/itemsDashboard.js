@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import ItemList from './itemlist';
 import './style.css'
 import ToggleableForm from '../bucketlist/toggleableForm';
-import {Container, Row, Col} from 'reactstrap';
+import {Container} from 'reactstrap';
 import SearchField from '../includes/searchField';
 import { getSingleBucketlists } from '../bucketlist/api';
 import Spinnar from '../includes/spinner';
@@ -20,28 +20,29 @@ const ItemsDashboard = (props) => {
     
 
     useEffect( () => {
+        const getBucketlist = async () =>{
+            try{
+                const res = await getSingleBucketlists(bucketlistId);
+                if(res.status === 200){
+                    setBucketList(res.data.bucketList);
+                }
+            }catch(err){
+                console.log(err);
+            }
+        }
+        const getBucketlistItems = async () => {
+            const res = await getItems(bucketlistId, 1, 20);
+            if(res.status === 200){
+                setItems(res.data.items);
+                setPage(res.data.page);
+                setPages(res.data.pages);
+            }
+        }
         getBucketlist();
         getBucketlistItems();
         setIsLoading(false);
-    }, [])
-    const getBucketlist = async () =>{
-        try{
-            const res = await getSingleBucketlists(bucketlistId);
-            if(res.status === 200){
-                setBucketList(res.data.bucketList);
-            }
-        }catch(err){
-            console.log(err);
-        }
-    }
-    const getBucketlistItems = async () => {
-        const res = await getItems(bucketlistId, 1, 20);
-        if(res.status === 200){
-            setItems(res.data.items);
-            setPage(res.data.page);
-            setPages(res.data.pages);
-        }
-    }
+    }, [bucketlistId])
+    
     const create = (e, name)  => {
         e.preventDefault();
 

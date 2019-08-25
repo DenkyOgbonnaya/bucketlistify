@@ -1,8 +1,8 @@
-import React, {useState, Fragment} from 'react';
+import React, {useState} from 'react';
 import {withRouter} from 'react-router-dom';
 import Form from './form';
 import moment from 'moment';
-import {Card, CardBody, CardTitle, CardText, CardLink, CardFooter, Input, Label} from 'reactstrap';
+import {Card, CardBody, CardTitle, CardText, CardLink, CardFooter} from 'reactstrap';
 import './style.css';
 
 const EditableBucketlist = (props) => {

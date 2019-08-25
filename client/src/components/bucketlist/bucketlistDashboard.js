@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import BucketList from './bucketList';
 import ToggleableForm from './toggleableForm';
-import {Container, Row, Col} from 'reactstrap';
+import {Container} from 'reactstrap';
 import SearchField from '../includes/searchField';
 import {getBucketlists, searchBucketlists, createBucketlists, updateBucketlists, deleteBucketlists} from './api'
 import Spinnar from '../includes/spinner';
