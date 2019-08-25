@@ -1,4 +1,4 @@
-const { check, validationResult } = require('express-validator/check');
+const { check, validationResult } = require('express-validator');
 
 module.exports.validateBucketlist = [
     check('name', 'BucketList name is required or too short').not().isEmpty().isLength({min: 2}),
