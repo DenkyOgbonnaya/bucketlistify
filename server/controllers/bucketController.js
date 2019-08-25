@@ -6,7 +6,7 @@ const bucketCtrl = {
             const bucket = await bucketService.create(req.body);
             return res.status(201).send({
                 status: 'success',
-                bucket: bucket,
+                bucketList: bucket,
                 message: 'New bucketlist created succesfully'
             })
         }catch(err){
@@ -53,7 +53,7 @@ const bucketCtrl = {
             if(bucket){
                 return res.status(200).send({
                     status: 'success',
-                    bucket
+                    bucketList: bucket
                 })
             }
             return res.status(404).send({message: 'This bucket is not found'});
@@ -67,7 +67,11 @@ const bucketCtrl = {
 
         try{
             const bucket = await bucketService.update(id, req.body);
-            return res.status(200).send({status: 'success', bucket})
+            return res.status(200).send({
+                status: 'success', 
+                bucketList: bucket,
+                message: 'BucketList updated succefully'
+            })
             
         }catch(err){
             res.status(500).send({message: err.message}); 
@@ -77,7 +81,7 @@ const bucketCtrl = {
         const{id} = req.params;
         try{
             const deleted = await bucketService.delete(id);
-            return res.status(200).send({status: 'success'})
+            return res.status(200).send({status: 'success', message: 'BucketList deleted Successfully'})
         }catch(err){
             res.status(400).send({message: err.message});
         }

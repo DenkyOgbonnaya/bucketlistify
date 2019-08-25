@@ -4,7 +4,7 @@ module.exports.validateBucketlist = [
     check('name', 'BucketList name is required or too short').not().isEmpty().isLength({min: 2}),
 ]
 module.exports.validateBucketitem = [
-    check('name', 'Item name is required or too short').not().isEmpty().isLength({min: 2}),
+    check('name', 'Item name is required or too short').optional().isLength({min: 2}),
     check('done', 'done must be true or false').optional().isIn(['true', 'false'])
 ]
 module.exports.validateUserDetails= validateUserData = [

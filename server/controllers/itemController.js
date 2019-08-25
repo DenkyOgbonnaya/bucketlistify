@@ -74,7 +74,7 @@ const itemCtrl = {
 
         try{
             const item = await itemService.update(id, item_id, req.body);
-            return res.status(200).send({status: 'success', item})
+            return res.status(200).send({status: 'success', item, message: 'Item updated succeffuly'})
             
         }catch(err){
         res.status(500).send({message: err.message}); 
@@ -84,7 +84,7 @@ const itemCtrl = {
         const{id, item_id} = req.params;
         try{
             const deleted = await itemService.delete(id, item_id);
-            return res.status(200).send({status: 'success'})
+            return res.status(200).send({status: 'success', message: 'Item deleted successfully'})
         }catch(err){
             res.status(400).send({message: err.message});
         }
