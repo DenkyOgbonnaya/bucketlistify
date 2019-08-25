@@ -24,8 +24,11 @@ const bucketService = {
         }
     },
     async bucketListCount(created_by){
+        const query = {};
+        if(created_by)
+            query.created_by = created_by
         try{
-            return count = Bucket.countDocuments({created_by});
+            return count = Bucket.countDocuments(query);
         }catch(err){
             throw err;
         }

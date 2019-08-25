@@ -17,7 +17,7 @@ const itemCtrl = {
                 message: 'New item created succesfully'
             })
         }catch(err){
-            res.status(500).send(err.message);    
+            res.status(500).send({message: err.message});    
         }
     },
     async getItems(req, res){
@@ -48,7 +48,7 @@ const itemCtrl = {
                 total: count
             })
         }catch(err){
-            res.status(500).send(err.message);
+            res.status(500).send({message: err.message});
 
         }
     },
@@ -65,7 +65,7 @@ const itemCtrl = {
             }
             return res.status(404).send({message: 'This item is not found'});
         }catch(err){
-            res.status(500).send(err.message)
+            res.status(500).send({message: err.message})
         }
     },
     
@@ -77,7 +77,7 @@ const itemCtrl = {
             return res.status(200).send({status: 'success', item})
             
         }catch(err){
-            res.status(500).send(err.message); 
+        res.status(500).send({message: err.message}); 
         }
     },
     async deleteItem(req, res){
@@ -86,7 +86,7 @@ const itemCtrl = {
             const deleted = await itemService.delete(id, item_id);
             return res.status(200).send({status: 'success'})
         }catch(err){
-            res.status(400).send(err.message);
+            res.status(400).send({message: err.message});
         }
     },
 }

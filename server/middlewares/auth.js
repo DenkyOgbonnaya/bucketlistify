@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const userService = require('../services/userService');
+//const jwtr = require('../utills/jwtrConfig');
+require('dotenv').config();
 
 const{usernameExist, emailExist} = userService;
 
@@ -34,11 +36,9 @@ module.exports.hasAccess = (req, res, next) => {
         token = token.slice(7);
     if(!token) return res.status(401 ).send({message: 'Access denied! unauthorized user'})
     
-    jwt.verify(token, process.env.SECRET_KEY, (err, decoded)=>{
-        if(err) {
-            return res.status(401).send({message: err.message})
-        }
-    
-        next();
-    });
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        if(err)
+            return res.status(401).send({message: err.message});
+        next()
+    } ); 
 }

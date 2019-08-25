@@ -10,7 +10,7 @@ const bucketCtrl = {
                 message: 'New bucketlist created succesfully'
             })
         }catch(err){
-            res.status(500).send(err.message);    
+            res.status(500).send({message: err.message});    
         }
     },
     async getBucketList(req, res){
@@ -41,7 +41,7 @@ const bucketCtrl = {
                 total: bucketListCount
                 })
         }catch(err){
-            res.status(500).send(err.message);
+            res.status(500).send({message: err.message});
 
         }
     },
@@ -58,7 +58,7 @@ const bucketCtrl = {
             }
             return res.status(404).send({message: 'This bucket is not found'});
         }catch(err){
-            res.status(500).send(err.message)
+            res.status(500).send({message: err.message})
         }
     },
     
@@ -70,7 +70,7 @@ const bucketCtrl = {
             return res.status(200).send({status: 'success', bucket})
             
         }catch(err){
-            res.status(500).send(err.message); 
+            res.status(500).send({message: err.message}); 
         }
     },
     async deleteBucket(req, res){
@@ -79,7 +79,7 @@ const bucketCtrl = {
             const deleted = await bucketService.delete(id);
             return res.status(200).send({status: 'success'})
         }catch(err){
-            res.status(400).send(err.message);
+            res.status(400).send({message: err.message});
         }
     },
 }
