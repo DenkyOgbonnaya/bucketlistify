@@ -50,7 +50,7 @@ const userCtrl = {
             res.status(500).send(err.message);
         }
     },
-    logoutUser(res, res){
+    logoutUser(req, res){
         return res.status(200).send({status: 'success', message: 'User logged out'})
     }
 }
